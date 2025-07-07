@@ -1,25 +1,52 @@
-import { multiply } from 'react-native-dial-ussd';
-import { Text, View, StyleSheet } from 'react-native';
-import { useState, useEffect } from 'react';
+import React from 'react';
+import {
+  Alert,
+  Button,
+  Linking,
+  PermissionsAndroid,
+  Platform,
+} from 'react-native';
+import { dialUssd } from 'react-native-dial-ussd';
 
 export default function App() {
-  const [result, setResult] = useState<number | undefined>();
+  async function run() {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CALL_PHONE
+    );
 
-  useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+    switch (granted) {
+      case PermissionsAndroid.RESULTS.GRANTED:
+        await dialUssd('*123#');
+        break;
 
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
-  );
+      case PermissionsAndroid.RESULTS.DENIED:
+        Alert.alert(
+          'Permission required',
+          'This feature needs access to make calls. Please grant the permission when prompted.'
+        );
+        break;
+
+      case PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN:
+        Alert.alert(
+          'Permission blocked',
+          'You’ve blocked call permissions. To use this feature, open Settings and allow CALL_PHONE.',
+          [
+            { text: 'Cancel', style: 'cancel' },
+            {
+              text: 'Open Settings',
+              onPress: () => {
+                if (Platform.OS === 'android') {
+                  Linking.openSettings();
+                }
+              },
+            },
+          ]
+        );
+        break;
+
+      default:
+        console.log('Unknown permission result:', granted);
+    }
+  }
+  return <Button title="Dial *123#" onPress={run} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
