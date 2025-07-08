@@ -8,3 +8,15 @@ yarn add ../react-native-dial-ussd/react-native-dial-ussd.tgz
 # atau npm install ../react-native-dial-ussd/react-native-dial-ussd.tgz
 yarn ios   # lalu pod install untuk iOS
 yarn android
+
+atau
+
+yarn install
+yarn clean          # optional
+yarn build          # menjalankan bob build → membuat folder lib/
+yarn pack --filename react-native-dial-ussd.tgz
+
+yarn add file:../react-native-dial-ussd/react-native-dial-ussd.tgz
+
+yarn ios   # lalu pod install untuk iOS
+yarn android
