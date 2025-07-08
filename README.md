@@ -11,10 +11,10 @@ yarn android
 
 atau
 
-yarn install
+yarn install        # pastikan dependensi lengkap
 yarn clean          # optional
 yarn build          # menjalankan bob build → membuat folder lib/
-yarn pack --filename react-native-dial-ussd.tgz
+yarn pack --filename react-native-dial-ussd.tgz # pastikan lib ada di dalam react-native-dial-ussd.tgz
 
 yarn add file:../react-native-dial-ussd/react-native-dial-ussd.tgz
 
