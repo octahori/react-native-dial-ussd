@@ -3,18 +3,6 @@
 @implementation DialUssd
 RCT_EXPORT_MODULE()
 
-// Example method
-// See // https://reactnative.dev/docs/native-modules-ios
-RCT_EXPORT_METHOD(multiply:(double)a
-                  b:(double)b
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-{
-    NSNumber *result = @(a * b);
-
-    resolve(result);
-}
-
 // Dial USSD code (may not work on all carriers/iOS versions)
 RCT_EXPORT_METHOD(dialUssd:(NSString *)code
                   resolver:(RCTPromiseResolveBlock)resolve

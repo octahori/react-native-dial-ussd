@@ -20,9 +20,7 @@ const DialUssd = NativeModules.DialUssd
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return DialUssd.multiply(a, b);
-}
+
 
 export function dialUssd(code: string): Promise<void> {
   return DialUssd.dialUssd(code);
