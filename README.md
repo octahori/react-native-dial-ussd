@@ -1,33 +1,53 @@
 # react-native-dial-ussd
 
-React Native Library for Sending USSD
+A React Native native module to dial USSD codes programmatically on Android & iOS.
+
+## Features
+- Dial any USSD code (e.g. `*123#`).
+- Promise-based API `dialUssd(code: string): Promise<void>`.
+- Ready-to-use `DialUssdButton` component.
 
 ## Installation
 
-```sh
+```bash
+# with yarn
+yarn add react-native-dial-ussd
+
+# with npm
 npm install react-native-dial-ussd
+```
+
+iOS only:
+
+```bash
+cd ios && pod install
 ```
 
 ## Usage
 
+```tsx
+import { dialUssd, DialUssdButton } from 'react-native-dial-ussd';
 
-```js
-import { multiply } from 'react-native-dial-ussd';
+// imperative
+await dialUssd('*123#');
 
-// ...
-
-const result = await multiply(3, 7);
+// declarative
+<DialUssdButton code="*123#" />
 ```
 
+### DialUssdButton Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `code` | `string` | – | USSD code to dial (e.g. `*123#`). |
+| `title` | `string` | `Dial ${code}` | Button label |
+| `buttonStyle` | `StyleProp<ViewStyle>` | – | Override button container style |
+| `textStyle` | `StyleProp<TextStyle>` | – | Override label style |
 
-## Contributing
+## Example
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+Clone this repo and run the example app:
 
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+```bash
+yarn
+yarn example android   # or ios
+```
