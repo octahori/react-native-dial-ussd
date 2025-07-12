@@ -1,28 +1,53 @@
-## 1. Membangun & Mem-pack Library (root)
+# react-native-dial-ussd
+
+A React Native native module to dial USSD codes programmatically on Android & iOS.
+
+## Features
+- Dial any USSD code (e.g. `*123#`).
+- Promise-based API `dialUssd(code: string): Promise<void>`.
+- Ready-to-use `DialUssdButton` component.
+
+## Installation
 
 ```bash
-yarn install            # pasang dependensi
-yarn clean              # opsional, bersih-bersih
-yarn pack:local         # menghasilkan react-native-dial-ussd.tgz beserta folder lib/
+# with yarn
+yarn add react-native-dial-ussd
+
+# with npm
+npm install react-native-dial-ussd
 ```
 
-## 2. Menggunakan di Proyek React Native lain
+iOS only:
 
 ```bash
-yarn add ../react-native-dial-ussd/react-native-dial-ussd.tgz  # or npm install ../react-native-dial-ussd/react-native-dial-ussd.tgz
-yarn ios      # lalu pod install untuk iOS
-yarn android
+cd ios && pod install
 ```
 
-atau
+## Usage
+
+```tsx
+import { dialUssd, DialUssdButton } from 'react-native-dial-ussd';
+
+// imperative
+await dialUssd('*123#');
+
+// declarative
+<DialUssdButton code="*123#" />
+```
+
+### DialUssdButton Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `code` | `string` | – | USSD code to dial (e.g. `*123#`). |
+| `title` | `string` | `Dial ${code}` | Button label |
+| `buttonStyle` | `StyleProp<ViewStyle>` | – | Override button container style |
+| `textStyle` | `StyleProp<TextStyle>` | – | Override label style |
+
+## Example
+
+Clone this repo and run the example app:
 
 ```bash
-yarn install             # pastikan dependensi lengkap
-yarn clean               # optional
-yarn build               # menjalankan bob build → membuat folder lib/
-yarn pack --filename react-native-dial-ussd.tgz   # pastikan lib ada di dalam react-native-dial-ussd.tgz
-
-yarn add file:../react-native-dial-ussd/react-native-dial-ussd.tgz
-
-yarn ios   # lalu pod install untuk iOS
-yarn android
+yarn
+yarn example android   # or ios
+```
